@@ -1,0 +1,21 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.8",
+	"Category": "Samples",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "kortex_environment",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
+	],
+	"TargetPlatforms": [
+		"MacNoEditor",
+		"WindowsNoEditor"
+	],
+	"EpicSampleNameHash": "3769454916"
+}
