@@ -1,36 +1,56 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "kortex_environment.h"
 #include "KCharacter.h"
 
-
-// Sets default values
 AKCharacter::AKCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
-// Called when the game starts or when spawned
+AKCharacter::AKCharacter(const FObjectInitializer& ObjectInitializer)
+: Super(ObjectInitializer)
+{
+
+    FirstPersonCameraComponent = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("FirstPersonCamera"));
+    FirstPersonCameraComponent->AttachParent = GetCapsuleComponent();
+    FirstPersonCameraComponent->RelativeLocation = FVector(0, 0, 50.0f + BaseEyeHeight);
+    FirstPersonCameraComponent->bUsePawnControlRotation = true;
+    
+    LSceneCaptureComponent2D = ObjectInitializer.CreateDefaultSubobject<USceneCaptureComponent2D>(this, TEXT("LScene"));
+    static ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> LMinimapTexObj(TEXT("TextureRenderTarget2D'/Game/TextureTargets/TextureLeft.TextureLeft'"));
+    LTextureRenderTarget2D = LMinimapTexObj.Object;
+    LSceneCaptureComponent2D->TextureTarget = LTextureRenderTarget2D;
+    LCameraComponent = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("LCamera"));
+    LSceneCaptureComponent2D->AttachParent = LCameraComponent;
+    LCameraComponent->AttachParent = GetCapsuleComponent();
+    LCameraComponent->RelativeLocation = FVector(0, 0, 50.0f + BaseEyeHeight);
+    LCameraComponent->bUsePawnControlRotation = true;
+    
+    RSceneCaptureComponent2D = ObjectInitializer.CreateDefaultSubobject<USceneCaptureComponent2D>(this, TEXT("RScene"));
+    static ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> RMinimapTexObj(TEXT("TextureRenderTarget2D'/Game/TextureTargets/TextureRight.TextureRight'"));
+    RTextureRenderTarget2D = RMinimapTexObj.Object;
+    RSceneCaptureComponent2D->TextureTarget = RTextureRenderTarget2D;
+    RCameraComponent = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("RCamera"));
+    RSceneCaptureComponent2D->AttachParent = RCameraComponent;
+    RCameraComponent->AttachParent = GetCapsuleComponent();
+    RCameraComponent->RelativeLocation = FVector(0, 0, 50.0f + BaseEyeHeight);
+    RCameraComponent->bUsePawnControlRotation = true;
+}
+
 void AKCharacter::BeginPlay()
 {
     Super::BeginPlay();
     
     if (GEngine)
     {
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You are Kortex!"));
+        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Kortex AI"));
     }
 }
 
-// Called every frame
 void AKCharacter::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
 }
 
-// Called to bind functionality to input
 void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);

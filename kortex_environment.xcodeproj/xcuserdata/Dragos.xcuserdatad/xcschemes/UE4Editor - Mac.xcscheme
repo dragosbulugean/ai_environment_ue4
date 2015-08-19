@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "08A57C5B25B00FA4FA5E4857"
+               BlueprintIdentifier = "2C15D57593E70AEEFE33308F"
                BuildableName = "UE4Editor - Mac"
                BlueprintName = "UE4Editor - Mac"
                ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "140E7939346D7B526D616B76"
+               BlueprintIdentifier = "71665C6627798BD8F3C6E09B"
                BuildableName = "UE4CmdLineRun.xctest"
                BlueprintName = "UE4CmdLineRun"
                ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08A57C5B25B00FA4FA5E4857"
+            BlueprintIdentifier = "2C15D57593E70AEEFE33308F"
             BuildableName = "UE4Editor - Mac"
             BlueprintName = "UE4Editor - Mac"
             ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -65,7 +65,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08A57C5B25B00FA4FA5E4857"
+            BlueprintIdentifier = "2C15D57593E70AEEFE33308F"
             BuildableName = "UE4Editor - Mac"
             BlueprintName = "UE4Editor - Mac"
             ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -84,7 +84,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08A57C5B25B00FA4FA5E4857"
+            BlueprintIdentifier = "2C15D57593E70AEEFE33308F"
             BuildableName = "UE4Editor.app"
             BlueprintName = "UE4Editor"
             ReferencedContainer = "container:UE4.xcodeproj">
