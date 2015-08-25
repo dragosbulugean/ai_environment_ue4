@@ -333,78 +333,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/kortex_environment/KCharacter.cpp"
-            timestampString = "461692605.354148"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "AKCharacter::Tick( float DeltaTime )"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AKCharacter::Tick(float)"
-                  moduleName = "UE4Editor-kortex_environment-7019-Mac-DebugGame.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
-                  timestampString = "461693686.364795"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "21">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AKCharacter::Tick(float)"
-                  moduleName = "UE4Editor-kortex_environment-8589-Mac-DebugGame.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
-                  timestampString = "461693831.419487"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "21">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AKCharacter::Tick(float)"
-                  moduleName = "UE4Editor-kortex_environment-9567-Mac-DebugGame.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
-                  timestampString = "461695594.549431"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "21">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/kortex_environment/KCharacter.cpp"
-            timestampString = "461692605.354148"
+            timestampString = "461774170.88418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "AKCharacter::BeginPlay()"
             landmarkType = "5">
          </BreakpointContent>
@@ -692,11 +629,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/kortex_environment/KCharacter.cpp"
-            timestampString = "461692605.354148"
+            timestampString = "461774170.88418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "AKCharacter::MoveForward(float Value)"
             landmarkType = "5">
             <Locations>
@@ -740,11 +677,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/kortex_environment/KCharacter.cpp"
-            timestampString = "461692605.354148"
+            timestampString = "461774170.88418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
             landmarkName = "AKCharacter::AKCharacter(const FObjectInitializer&amp; ObjectInitializer)"
             landmarkType = "5">
          </BreakpointContent>
@@ -756,11 +693,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/kortex_environment/KCharacter.cpp"
-            timestampString = "461692605.354148"
+            timestampString = "461774170.88418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "AKCharacter::BeginPlay()"
             landmarkType = "5">
          </BreakpointContent>
@@ -772,11 +709,230 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/kortex_environment/KCharacter.cpp"
-            timestampString = "461693639.115952"
+            timestampString = "461774170.88418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "AKCharacter::Tick( float DeltaTime )"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::MoveForward(float)"
+                  moduleName = "UE4Editor-kortex_environment-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461757853.4432"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::SetupPlayerInputComponent(UInputComponent*)"
+                  moduleName = "UE4Editor-kortex_environment-5555-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461757853.443371"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "145">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::SetupPlayerInputComponent(UInputComponent*)"
+                  moduleName = "UE4Editor-kortex_environment-7919-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461757853.443481"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "261">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::Tick(float)"
+                  moduleName = "UE4Editor-kortex_environment-7134-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461757853.443597"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::Tick(float)"
+                  moduleName = "UE4Editor-kortex_environment-4781-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461757853.443694"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "2012">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::Tick(float)"
+                  moduleName = "UE4Editor-kortex_environment-9564-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461757876.052881"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "61">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::Tick(float)"
+                  moduleName = "UE4Editor-kortex_environment-6722-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461758043.944757"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/kortex_environment/KCharacter.cpp"
+            timestampString = "461774170.88418"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "AKCharacter::Tick( float DeltaTime )"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::Tick(float)"
+                  moduleName = "UE4Editor-kortex_environment-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461760720.851345"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "21">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::Tick(float)"
+                  moduleName = "UE4Editor-kortex_environment-4207-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461761401.663873"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "21">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/kortex_environment/KCharacter.cpp"
+            timestampString = "461774170.88418"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "AKCharacter::Tick( float DeltaTime )"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::Tick(float)"
+                  moduleName = "UE4Editor-kortex_environment-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461760720.851616"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "21">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::Tick(float)"
+                  moduleName = "UE4Editor-kortex_environment-4207-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461761401.665635"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "41">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/kortex_environment/KCharacter.cpp"
+            timestampString = "461774170.88418"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
             landmarkName = "AKCharacter::AKCharacter(const FObjectInitializer&amp; ObjectInitializer)"
             landmarkType = "5">
             <Locations>
@@ -785,47 +941,293 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "AKCharacter::AKCharacter(FObjectInitializer const&amp;)"
-                  moduleName = "UE4Editor-kortex_environment-7019-Mac-DebugGame.dylib"
+                  moduleName = "UE4Editor-kortex_environment-Mac-DebugGame.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
-                  timestampString = "461693639.166929"
+                  timestampString = "461761709.093657"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "610">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AKCharacter::AKCharacter(FObjectInitializer const&amp;)"
-                  moduleName = "UE4Editor-kortex_environment-8589-Mac-DebugGame.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
-                  timestampString = "461693831.419264"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
                   offsetFromSymbolStart = "667">
                </Location>
                <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::AKCharacter(FObjectInitializer const&amp;)"
+                  moduleName = "UE4Editor-kortex_environment-7458-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461761854.487744"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "676">
+               </Location>
+               <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "AKCharacter::AKCharacter(FObjectInitializer const&amp;)"
-                  moduleName = "UE4Editor-kortex_environment-9567-Mac-DebugGame.dylib"
+                  moduleName = "UE4Editor-kortex_environment-272-Mac-DebugGame.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
-                  timestampString = "461695594.549219"
+                  timestampString = "461762317.439475"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "739">
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "676">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::AKCharacter(FObjectInitializer const&amp;)"
+                  moduleName = "UE4Editor-kortex_environment-1162-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762383.939235"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "676">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/kortex_environment/KCharacter.cpp"
+            timestampString = "461774170.88418"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "AKCharacter::AKCharacter(const FObjectInitializer&amp; ObjectInitializer)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::AKCharacter(FObjectInitializer const&amp;)"
+                  moduleName = "UE4Editor-kortex_environment-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461761858.885971"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "1189">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::AKCharacter(FObjectInitializer const&amp;)"
+                  moduleName = "UE4Editor-kortex_environment-7458-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461761858.886183"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "1216">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::AKCharacter(FObjectInitializer const&amp;)"
+                  moduleName = "UE4Editor-kortex_environment-272-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762317.439735"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "1363">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::AKCharacter(FObjectInitializer const&amp;)"
+                  moduleName = "UE4Editor-kortex_environment-1162-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762383.939464"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "1363">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/kortex_environment/KCharacter.cpp"
+            timestampString = "461805912.006807"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::GetRightPixelMatrix()"
+                  moduleName = "UE4Editor-kortex_environment-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762002.48677"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::GetLeftPixelMatrix()"
+                  moduleName = "UE4Editor-kortex_environment-7458-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762002.486986"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::GetLeftPixelMatrix()"
+                  moduleName = "UE4Editor-kortex_environment-272-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762317.441777"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::GetLeftPixelMatrix()"
+                  moduleName = "UE4Editor-kortex_environment-1162-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762383.941593"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/kortex_environment/KCharacter.cpp"
+            timestampString = "461805912.006807"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::GetRightPixelMatrix()"
+                  moduleName = "UE4Editor-kortex_environment-7458-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762003.296456"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::GetRightPixelMatrix()"
+                  moduleName = "UE4Editor-kortex_environment-272-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762317.442096"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AKCharacter::GetRightPixelMatrix()"
+                  moduleName = "UE4Editor-kortex_environment-1162-Mac-DebugGame.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Dragos/KalonProjects/kortex_environment/Source/kortex_environment/KCharacter.cpp"
+                  timestampString = "461762383.94192"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/kortex_environment/KCharacter.cpp"
+            timestampString = "461805912.006807"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "AKCharacter::GetRightPixelMatrix()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

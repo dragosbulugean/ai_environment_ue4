@@ -24,6 +24,10 @@ public:
     UFUNCTION()
     void MoveRight(float Val);
     
+    void GetPixelMatrixFromTexture(UTextureRenderTarget2D* Texture);
+    void GetLeftPixelMatrix();
+    void GetRightPixelMatrix();
+    
     /** First person camera */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
     UCameraComponent* FirstPersonCameraComponent;

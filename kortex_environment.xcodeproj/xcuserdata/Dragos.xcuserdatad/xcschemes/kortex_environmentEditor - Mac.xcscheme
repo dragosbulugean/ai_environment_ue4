@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "97019536C54C69922637ED54"
+               BlueprintIdentifier = "B93443B07DF671E8F5CE1937"
                BuildableName = "kortex_environmentEditor - Mac"
                BlueprintName = "kortex_environmentEditor - Mac"
                ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "71665C6627798BD8F3C6E09B"
+               BlueprintIdentifier = "218920EFE04144E374789075"
                BuildableName = "UE4CmdLineRun.xctest"
                BlueprintName = "UE4CmdLineRun"
                ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "97019536C54C69922637ED54"
+            BlueprintIdentifier = "B93443B07DF671E8F5CE1937"
             BuildableName = "kortex_environmentEditor - Mac"
             BlueprintName = "kortex_environmentEditor - Mac"
             ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -66,7 +66,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "97019536C54C69922637ED54"
+            BlueprintIdentifier = "B93443B07DF671E8F5CE1937"
             BuildableName = "kortex_environmentEditor - Mac"
             BlueprintName = "kortex_environmentEditor - Mac"
             ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -95,7 +95,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "97019536C54C69922637ED54"
+            BlueprintIdentifier = "B93443B07DF671E8F5CE1937"
             BuildableName = "UE4Editor.app"
             BlueprintName = "UE4Editor"
             ReferencedContainer = "container:UE4.xcodeproj">

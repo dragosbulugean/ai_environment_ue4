@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7DBEBEB590062C9C08543094"
+               BlueprintIdentifier = "27FC515F02F02C47BA7CA1B6"
                BuildableName = "kortex_environment.app"
                BlueprintName = "kortex_environment - iOS"
                ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "71665C6627798BD8F3C6E09B"
+               BlueprintIdentifier = "218920EFE04144E374789075"
                BuildableName = "UE4CmdLineRun.xctest"
                BlueprintName = "UE4CmdLineRun"
                ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7DBEBEB590062C9C08543094"
+            BlueprintIdentifier = "27FC515F02F02C47BA7CA1B6"
             BuildableName = "kortex_environment.app"
             BlueprintName = "kortex_environment - iOS"
             ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -62,7 +62,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7DBEBEB590062C9C08543094"
+            BlueprintIdentifier = "27FC515F02F02C47BA7CA1B6"
             BuildableName = "kortex_environment.app"
             BlueprintName = "kortex_environment - iOS"
             ReferencedContainer = "container:kortex_environment.xcodeproj">
@@ -91,7 +91,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7DBEBEB590062C9C08543094"
+            BlueprintIdentifier = "27FC515F02F02C47BA7CA1B6"
             BuildableName = "kortex_environment.app"
             BlueprintName = "kortex_environment"
             ReferencedContainer = "container:UE4.xcodeproj">
