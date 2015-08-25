@@ -9,8 +9,9 @@ class KORTEX_ENVIRONMENT_API AKCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-    
+   
     AKCharacter();
+    
     AKCharacter(const FObjectInitializer& ObjectInitializer);
 
 	virtual void BeginPlay() override;
@@ -18,6 +19,8 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
     virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+    
+    int index;
     
     UFUNCTION()
     void MoveForward(float Val);
@@ -51,5 +54,6 @@ public:
     /** Right eye texture render target */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
     UTextureRenderTarget2D* RTextureRenderTarget2D;
+    
 
 };
