@@ -1,6 +1,7 @@
 //#include <vector>
 #include "kortex_environment.h"
 #include "KCharacter.h"
+
 #include <sstream>
 #include <string>
 
@@ -9,19 +10,8 @@
 #include <boost/gil/gil_all.hpp>
 #include <boost/gil/extension/io/png_dynamic_io.hpp>
 
-// ASIO
-//#include <ctime>
-//#include <iostream>
-//#include <string>
-//#include <boost/array.hpp>
-//#include <boost/asio.hpp>
 
-//#include <boost/serialization/list.hpp>
-//#include <boost/gil/image.hpp>
-//#include <boost/gil/typedefs.hpp>
-//#include <boost/gil/extension/io/jpeg_io.hpp>
-//#include <boost/gil/extension/numeric/kernel.hpp>
-//#include <boost/gil/extension/numeric/convolve.hpp>
+
 
 AKCharacter::AKCharacter()
 {
@@ -41,10 +31,11 @@ AKCharacter::AKCharacter(const FObjectInitializer& ObjectInitializer)
         Left Camera
     */
     LSceneCaptureComponent2D = ObjectInitializer.CreateDefaultSubobject<USceneCaptureComponent2D>(this, TEXT("LScene"));
-    ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> LMinimapTexObj(TEXT("TextureRenderTarget2D'/Game/TextureTargets/TextureLeft.TextureLeft'"));
-    LMinimapTexObj.Object->InitAutoFormat(1024, 1024);
+    LTextureRenderTarget2D = ObjectInitializer.CreateDefaultSubobject<UTextureRenderTarget2D>(this, TEXT("LTexture"));
+    LTextureRenderTarget2D->InitAutoFormat(512, 512);
+    LTextureRenderTarget2D->AddressX = TA_Wrap;
+    LTextureRenderTarget2D->AddressY = TA_Wrap;
 
-    LTextureRenderTarget2D = LMinimapTexObj.Object;
     LSceneCaptureComponent2D->TextureTarget = LTextureRenderTarget2D;
     LCameraComponent = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("LCamera"));
     LSceneCaptureComponent2D->AttachParent = LCameraComponent;
@@ -58,10 +49,11 @@ AKCharacter::AKCharacter(const FObjectInitializer& ObjectInitializer)
         Right Camera
      */
     RSceneCaptureComponent2D = ObjectInitializer.CreateDefaultSubobject<USceneCaptureComponent2D>(this, TEXT("RScene"));
-    ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> RMinimapTexObj(TEXT("TextureRenderTarget2D'/Game/TextureTargets/TextureRight.TextureRight'"));
-    RMinimapTexObj.Object->InitAutoFormat(1024, 1024);
-   
-    RTextureRenderTarget2D = RMinimapTexObj.Object;
+    RTextureRenderTarget2D = ObjectInitializer.CreateDefaultSubobject<UTextureRenderTarget2D>(this, TEXT("RTexture"));
+    RTextureRenderTarget2D->InitAutoFormat(512, 512);
+    RTextureRenderTarget2D->AddressX = TA_Wrap;
+    RTextureRenderTarget2D->AddressY = TA_Wrap;
+    
     RSceneCaptureComponent2D->TextureTarget = RTextureRenderTarget2D;
     RCameraComponent = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("RCamera"));
     RSceneCaptureComponent2D->AttachParent = RCameraComponent;
@@ -86,6 +78,7 @@ void AKCharacter::Tick( float DeltaTime )
 {
     
 	Super::Tick( DeltaTime );
+    
     if (AKCharacter::LTextureRenderTarget2D->TextureReference.IsInitialized())
     {
         int width = LTextureRenderTarget2D->SizeX;
@@ -114,7 +107,6 @@ void AKCharacter::Tick( float DeltaTime )
             }
         }
         
-        
         // Uncomment this to capture every frame :)
         //        std::stringstream ss;
         //        ss << "~/Desktop/frames/frame" << index << ".png";
@@ -124,6 +116,10 @@ void AKCharacter::Tick( float DeltaTime )
         png_write_view(src, const_view(img));
         index++;
     }
+    
+    //GetLeftPixelMatrix();
+    //GetRightPixelMatrix();
+    
 }
 
 void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -162,6 +158,35 @@ void AKCharacter::MoveRight(float Value)
         // add movement in that direction
         AddMovementInput(Direction, Value);
     }
+}
+
+void AKCharacter::GetPixelMatrixFromTexture(UTextureRenderTarget2D* TextureRenderTarget2D) {
+    
+    UTexture2D* Texture = TextureRenderTarget2D->ConstructTexture2D(this, "AlphaTex", EObjectFlags::RF_NoFlags, CTF_DeferCompression);
+    FTexture2DMipMap* MyMipMap = &Texture->PlatformData->Mips[0];
+    FByteBulkData* RawImageData = &MyMipMap->BulkData;
+    FColor* FormatedImageData = static_cast<FColor*>( RawImageData->Lock( LOCK_READ_ONLY ) );
+    uint32 TextureWidth = MyMipMap->SizeX, TextureHeight = MyMipMap->SizeY;
+    FColor PixelColor;
+    
+    for(int i=0; i<TextureWidth; i++)
+    {
+        for(int j=0; j<TextureHeight; j++)
+        {
+            PixelColor = FormatedImageData[i * TextureWidth + j];
+        }
+    }
+    
+    RawImageData->Unlock();
+
+}
+
+void AKCharacter::GetLeftPixelMatrix() {
+    return GetPixelMatrixFromTexture(LTextureRenderTarget2D);
+}
+
+void AKCharacter::GetRightPixelMatrix() {
+    return GetPixelMatrixFromTexture(RTextureRenderTarget2D);
 }
 
 

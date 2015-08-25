@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/kortex_environment/KCharacter.cpp"
-            timestampString = "462192442.594494"
+            timestampString = "462196970.212047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "AKCharacter::MoveRight(float Value)"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,11 +26,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/kortex_environment/KCharacter.cpp"
-            timestampString = "462192442.594494"
+            timestampString = "462196970.212047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "AKCharacter::Tick( float DeltaTime )"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/kortex_environment/KCharacter.cpp"
+            timestampString = "462197001.202807"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "AKCharacter::Tick( float DeltaTime )"
             landmarkType = "5">
          </BreakpointContent>
