@@ -1,9 +1,17 @@
 kortex_environment.xcodeproj
+
 Binaries
+
 DerivedDataCache
+
 Intermediate
+
 Saved
+
 *.sdf
+
 *.opensdf
+
 *.sln
+
 *.suo
