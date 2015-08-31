@@ -19,45 +19,16 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
     virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-    
-    int index;
-    
+        
     UFUNCTION()
     void MoveForward(float Val);
     UFUNCTION()
     void MoveRight(float Val);
     
-    void GetPixelMatrixFromTexture(UTextureRenderTarget2D* Texture);
-    void GetLeftPixelMatrix();
-    void GetRightPixelMatrix();
+	void ToggleStreaming();
     
     /** First person camera */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
     UCameraComponent* FirstPersonCameraComponent;
-    
-    /** Left eye camera */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-    UCameraComponent* LCameraComponent;
-    
-    /** Left eye scenecapture */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-    USceneCaptureComponent2D* LSceneCaptureComponent2D;
-    
-    /** Left eye texture render target */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-    UTextureRenderTarget2D* LTextureRenderTarget2D;
-    
-    /** Right eye camera */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-    UCameraComponent* RCameraComponent;
-    
-    /** Right eye scenecapture */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-    USceneCaptureComponent2D* RSceneCaptureComponent2D;
-    
-    /** Right eye texture render target */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-    UTextureRenderTarget2D* RTextureRenderTarget2D;
-    
-
+  
 };

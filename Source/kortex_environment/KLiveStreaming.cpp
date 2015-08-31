@@ -3,7 +3,7 @@
 #include "ModuleManager.h"
 #include "Runtime/Core/Public/Features/IModularFeatures.h"
 #include "Runtime/Core/Public/Stats/Stats2.h"
-#include "ISettingsModule.h"
+//#include "ISettingsModule.h"
 
 void KLiveStreaming::StartupModule()
 {
