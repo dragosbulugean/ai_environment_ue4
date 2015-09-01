@@ -42,6 +42,9 @@ void AKGameMode::StartPlay()
 
 	AKCharacter* LeftEye = Cast<AKCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	AKCharacter* RightEye = Cast<AKCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 1));
+
+	UInputComponent* i1 = LeftEye->InputComponent;
+	RightEye->SetupPlayerInputComponent(i1);
 	
 	FVector LeftEyeVector(2150, -7, 200);
 	LeftEye->SetActorRelativeLocation(LeftEyeVector);

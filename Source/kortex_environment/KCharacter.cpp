@@ -19,12 +19,15 @@ AKCharacter::AKCharacter(const FObjectInitializer& ObjectInitializer)
 	FirstPersonCameraComponent->AttachParent = GetCapsuleComponent();
 	FirstPersonCameraComponent->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
-
 }
 
 void AKCharacter::BeginPlay()
 {
     Super::BeginPlay();
+
+	apc = Cast<APlayerController>(Controller);
+
+	UE_LOG(LogTemp, Warning, TEXT("Made 1 player!"));
 }
 
 void AKCharacter::Tick( float DeltaTime )
@@ -37,6 +40,7 @@ void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponen
 {
 	Super::SetupPlayerInputComponent(InputComponent);
 
+	this->Input = InputComponent;
     InputComponent->BindAxis("MoveForward", this, &AKCharacter::MoveForward);
     InputComponent->BindAxis("MoveRight", this, &AKCharacter::MoveRight);
     InputComponent->BindAxis("Turn", this, &AKCharacter::AddControllerYawInput);

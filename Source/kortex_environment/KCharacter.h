@@ -26,9 +26,13 @@ public:
     void MoveRight(float Val);
     
 	void ToggleStreaming();
+
+	UInputComponent* Input;
     
     /** First person camera */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
     UCameraComponent* FirstPersonCameraComponent;
+
+	APlayerController* apc;
   
 };
