@@ -23,11 +23,17 @@ void UKViewportClient::useFrames(){
 
 void UKViewportClient::Draw(FViewport * Viewport, FCanvas * SceneCanvas)
 {
-	FIntPoint Size = Viewport->GetSizeXY();
-	TArray<FColor>* pix = new TArray<FColor>();
+	
 	Super::Draw(Viewport, SceneCanvas);
+
+	//FIntPoint Size = Viewport->GetSizeXY();
+	//TArray<FColor>* pix = new TArray<FColor>();
 	//int width = Size.X;
 	//int height = Size.Y;
+	//Viewport->ReadPixels(*pix, FReadSurfaceDataFlags(),
+	//	FIntRect(0, 0, width, height));
+
+
 	////UE_LOG(Victory,Warning,TEXT("VICTORY GAME VIEWPORT Ticking!"));
 
 	////Take Screen shot?

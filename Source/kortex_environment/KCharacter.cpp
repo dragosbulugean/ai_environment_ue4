@@ -18,30 +18,30 @@ AKCharacter::AKCharacter(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
 
-	UCameraComponent* LeftTopCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("LeftTopCamera"));
-	LeftTopCamera->AttachParent = GetCapsuleComponent();
-	LeftTopCamera->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
-	LeftTopCamera->bUsePawnControlRotation = true;
+	MainCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("MainCamera"));
+	FVector MainCameraLocation(0, 0, 90);
+	MainCamera->SetRelativeLocation(MainCameraLocation);
+	MainCamera->AttachParent = GetCapsuleComponent();
+	MainCamera->bUsePawnControlRotation = true;
 
-	UCameraComponent* RightTopCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("RightTopCamera"));
-	RightTopCamera->AttachParent = GetCapsuleComponent();
-	RightTopCamera->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
-	RightTopCamera->bUsePawnControlRotation = true;
 
-	UCameraComponent* LeftBottomCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("LeftBottomCamera"));
-	LeftBottomCamera->AttachParent = GetCapsuleComponent();
-	LeftBottomCamera->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
-	LeftBottomCamera->bUsePawnControlRotation = true;
+	TopCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("TopCamera"));
+	FVector TopCameraLocation(0, 0, 90);
+	TopCamera->SetRelativeLocation(TopCameraLocation);
+	TopCamera->AttachParent = GetCapsuleComponent();
+	TopCamera->bUsePawnControlRotation = true;
 
-	auto RightBottomCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("RightBottomCamera"));
-	RightBottomCamera->AttachParent = GetCapsuleComponent();
-	RightBottomCamera->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
-	RightBottomCamera->bUsePawnControlRotation = true;
+	LeftCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("LeftCamera"));
+	FVector LeftCameraLocation(0, -110, 0);
+	LeftCamera->SetRelativeLocation(LeftCameraLocation);
+	LeftCamera->AttachParent = GetCapsuleComponent();
+	LeftCamera->bUsePawnControlRotation = true;
 
-	Cameras.Add(LeftTopCamera);
-	Cameras.Add(RightTopCamera);
-	Cameras.Add(LeftBottomCamera);
-	Cameras.Add(RightBottomCamera);
+	RightCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("RightCamera"));
+	FVector RightCameraLocation(0, 110, 0);
+	RightCamera->SetRelativeLocation(RightCameraLocation);
+	RightCamera->AttachParent = GetCapsuleComponent();
+	RightCamera->bUsePawnControlRotation = true;
 
 }
 
@@ -49,27 +49,41 @@ void AKCharacter::BeginPlay()
 {
 
     Super::BeginPlay();
-
-	PlayerController = Cast<APlayerController>(Controller);
-
+	MainCamera->SetActive(true);
 	CurrentCameraIndex = 0;
-	PlayerController->SetViewTarget(Cameras[CurrentCameraIndex]->GetOwner());
-
-	UE_LOG(LogTemp, Warning, TEXT("Made 1 player!"));
+	IsSwitching = false;
 
 }
 
 void AKCharacter::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
-	CurrentCameraIndex++;
-	if (CurrentCameraIndex == 4)
+	
+	if (IsSwitching == true)
 	{
-		CurrentCameraIndex = 0;
+		UE_LOG(LogTemp, Warning, TEXT("Current camera is: %d"), CurrentCameraIndex);
+		switch (CurrentCameraIndex)
+		{
+		case 0:
+			TopCamera->SetActive(true);
+			LeftCamera->SetActive(false);
+			RightCamera->SetActive(false);
+			CurrentCameraIndex = 1;
+			break;
+		case 1:
+			TopCamera->SetActive(false);
+			LeftCamera->SetActive(true);
+			RightCamera->SetActive(false);
+			CurrentCameraIndex = 2;
+			break;
+		case 2:
+			TopCamera->SetActive(false);
+			LeftCamera->SetActive(false);
+			RightCamera->SetActive(true);
+			CurrentCameraIndex = 0;
+			break;
+		}
 	}
-	PlayerController->SetViewTarget(Cameras[CurrentCameraIndex]->GetOwner());
-
 }
 
 void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -81,6 +95,7 @@ void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponen
     InputComponent->BindAxis("MoveRight", this, &AKCharacter::MoveRight);
     InputComponent->BindAxis("Turn", this, &AKCharacter::AddControllerYawInput);
     InputComponent->BindAxis("LookUp", this, &AKCharacter::AddControllerPitchInput);
+	InputComponent->BindAction("Switch", IE_Pressed, this, &AKCharacter::ToggleIsSwitching);
 	InputComponent->BindAction("Stream", IE_Pressed, this, &AKCharacter::ToggleStreaming);
 }
 
@@ -116,6 +131,7 @@ void AKCharacter::MoveRight(float Value)
 
 void AKCharacter::ToggleStreaming()
 {
+
 #if WITH_EDITOR
 	if (!IEditorLiveStreaming::Get().IsBroadcastingEditor()) {
 		IEditorLiveStreaming::Get().StartBroadcastingEditor();
@@ -134,4 +150,10 @@ void AKCharacter::ToggleStreaming()
 		IGameLiveStreaming::Get().StopBroadcastingGame();
 	}
 #endif
+}
+
+
+void AKCharacter::ToggleIsSwitching() {
+	MainCamera->SetActive(false);
+	IsSwitching = IsSwitching == true ? false : true;
 }

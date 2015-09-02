@@ -3,6 +3,8 @@
 #include "IKLiveStreaming.h"
 #include "Runtime/Engine/Public/Features/ILiveStreamingService.h"
 #include "Runtime/Engine/Public/Tickable.h"
+#include "KCharacter.h"
+
 
 
 /**
@@ -37,6 +39,8 @@ public:
 	virtual bool IsChatEnabled() const override;
 	virtual void SendChatMessage( const FString& ChatMessage ) override;
 	virtual void QueryLiveStreams( const FString& GameName, FQueryLiveStreamsCallback CompletionCallback ) override;
+
+	AKCharacter* Character;
 
 private:
 

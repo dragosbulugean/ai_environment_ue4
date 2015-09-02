@@ -26,14 +26,17 @@ public:
     void MoveRight(float Val);
     
 	void ToggleStreaming();
+	void ToggleIsSwitching();
+
 
 	UInputComponent* Input;
-    
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-    TArray<UCameraComponent*> Cameras;
 
-	uint32 CurrentCameraIndex;
+	UCameraComponent* MainCamera;
+	UCameraComponent* TopCamera;
+	UCameraComponent* LeftCamera;
+	UCameraComponent* RightCamera;
+   
+	int32 CurrentCameraIndex;
+	bool IsSwitching;
 
-	APlayerController* PlayerController;
-  
 };

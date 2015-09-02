@@ -12,7 +12,14 @@
 AKGameMode::AKGameMode(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
-    DefaultPawnClass = AKCharacter::StaticClass();}
+	DefaultPawnClass = AKCharacter::StaticClass();
+	/*static ConstructorHelpers::FObjectFinder<UBlueprint> Blueprint(TEXT("Blueprint'/Game/Blueprints/KCharacterBlueprint.KCharacterBlueprint'"));
+	if (Blueprint.Object){
+		DefaultPawnClass = (UClass*)Blueprint.Object->GeneratedClass;
+	}*/
+
+
+}
 
 void AKGameMode::StartPlay()
 {
@@ -37,26 +44,9 @@ void AKGameMode::StartPlay()
 
 	UGameInstance* gameInstance = currentWorld->GetGameInstance();
 	UGameViewportClient* gameViewport = currentWorld->GetGameViewport();
-	FString error;
-	ULocalPlayer* p2 = gameInstance->CreateLocalPlayer(2, error, true);
-
-	AKCharacter* LeftEye = Cast<AKCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	AKCharacter* RightEye = Cast<AKCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 1));
-
-	UInputComponent* i1 = LeftEye->InputComponent;
-	RightEye->SetupPlayerInputComponent(i1);
-	
-	FVector LeftEyeVector(2150, -7, 200);
-	LeftEye->SetActorRelativeLocation(LeftEyeVector);
-	FVector RightEyeVector(2240, -7, 200);
-	RightEye->SetActorRelativeLocation(RightEyeVector);
-	FRotator LeftEyeRotation(0.f, -20.f, 0.f);
-	LeftEye->SetActorRotation(LeftEyeRotation);
-	FRotator RightEyeRotation(0.f, 20.f, 0.f);
-	RightEye->SetActorRotation(RightEyeRotation);
-
 
 	KLiveStreaming* kss = new KLiveStreaming();
+	kss->Character = Cast<AKCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	kss->StartupModule();
 	bool isLiveStreamingModuleLoaded = kss->IsModuleLoaded();
 	if (isLiveStreamingModuleLoaded)

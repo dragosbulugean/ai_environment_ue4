@@ -119,6 +119,7 @@ void KLiveStreaming::QueryBroadcastConfig(FBroadcastConfig& OutBroadcastConfig) 
 	
 void KLiveStreaming::PushVideoFrame(const FColor* VideoFrameBuffer)
 {
+
 	UE_LOG(LogTemp, Warning, TEXT("GOT FRAME!"));
 
 	/*const uint8_t* Buffer;
