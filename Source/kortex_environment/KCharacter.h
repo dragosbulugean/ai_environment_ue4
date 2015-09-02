@@ -29,10 +29,11 @@ public:
 
 	UInputComponent* Input;
     
-    /** First person camera */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-    UCameraComponent* FirstPersonCameraComponent;
+    TArray<UCameraComponent*> Cameras;
 
-	APlayerController* apc;
+	uint32 CurrentCameraIndex;
+
+	APlayerController* PlayerController;
   
 };

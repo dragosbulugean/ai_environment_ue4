@@ -15,17 +15,41 @@ AKCharacter::AKCharacter(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
 
-	FirstPersonCameraComponent = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("FirstPersonCamera"));
-	FirstPersonCameraComponent->AttachParent = GetCapsuleComponent();
-	FirstPersonCameraComponent->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
-	FirstPersonCameraComponent->bUsePawnControlRotation = true;
+	UCameraComponent* LeftTopCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("LeftTopCamera"));
+	LeftTopCamera->AttachParent = GetCapsuleComponent();
+	LeftTopCamera->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
+	LeftTopCamera->bUsePawnControlRotation = true;
+
+	UCameraComponent* RightTopCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("RightTopCamera"));
+	RightTopCamera->AttachParent = GetCapsuleComponent();
+	RightTopCamera->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
+	RightTopCamera->bUsePawnControlRotation = true;
+
+	UCameraComponent* LeftBottomCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("LeftBottomCamera"));
+	LeftBottomCamera->AttachParent = GetCapsuleComponent();
+	LeftBottomCamera->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
+	LeftBottomCamera->bUsePawnControlRotation = true;
+
+	auto RightBottomCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("RightBottomCamera"));
+	RightBottomCamera->AttachParent = GetCapsuleComponent();
+	RightBottomCamera->RelativeLocation = FVector(0, 0, 150.0f + BaseEyeHeight);
+	RightBottomCamera->bUsePawnControlRotation = true;
+
+	Cameras.Add(LeftTopCamera);
+	Cameras.Add(RightTopCamera);
+	Cameras.Add(LeftBottomCamera);
+	Cameras.Add(RightBottomCamera);
+
 }
 
 void AKCharacter::BeginPlay()
 {
     Super::BeginPlay();
 
-	apc = Cast<APlayerController>(Controller);
+	PlayerController = Cast<APlayerController>(Controller);
+
+	CurrentCameraIndex = 0;
+	PlayerController->SetViewTarget(Cameras[CurrentCameraIndex]->GetOwner());
 
 	UE_LOG(LogTemp, Warning, TEXT("Made 1 player!"));
 }
@@ -33,7 +57,12 @@ void AKCharacter::BeginPlay()
 void AKCharacter::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-    
+	CurrentCameraIndex++;
+	if (CurrentCameraIndex == 4)
+	{
+		CurrentCameraIndex = 0;
+	}
+	PlayerController->SetViewTarget(Cameras[CurrentCameraIndex]->GetOwner());
 }
 
 void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
