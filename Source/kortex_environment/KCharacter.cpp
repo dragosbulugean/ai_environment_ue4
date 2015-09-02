@@ -5,6 +5,9 @@
 #include "Editor/EditorLiveStreaming/Public/IEditorLiveStreaming.h"
 #include <sstream>
 #include <string>
+#include "Runtime/Engine/Public/Features/ILiveStreamingService.h"
+#include "Runtime/GameLiveStreaming/Public/IGameLiveStreaming.h"
+#include "Editor/EditorLiveStreaming/Public/IEditorLiveStreaming.h"
 
 AKCharacter::AKCharacter()
 {
@@ -44,6 +47,7 @@ AKCharacter::AKCharacter(const FObjectInitializer& ObjectInitializer)
 
 void AKCharacter::BeginPlay()
 {
+
     Super::BeginPlay();
 
 	PlayerController = Cast<APlayerController>(Controller);
@@ -52,17 +56,20 @@ void AKCharacter::BeginPlay()
 	PlayerController->SetViewTarget(Cameras[CurrentCameraIndex]->GetOwner());
 
 	UE_LOG(LogTemp, Warning, TEXT("Made 1 player!"));
+
 }
 
 void AKCharacter::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
+
 	CurrentCameraIndex++;
 	if (CurrentCameraIndex == 4)
 	{
 		CurrentCameraIndex = 0;
 	}
 	PlayerController->SetViewTarget(Cameras[CurrentCameraIndex]->GetOwner());
+
 }
 
 void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
