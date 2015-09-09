@@ -19,26 +19,25 @@ AKCharacter::AKCharacter(const FObjectInitializer& ObjectInitializer)
 {
 
 	MainCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("MainCamera"));
-	FVector MainCameraLocation(0, 0, 90);
+	FVector MainCameraLocation(0, 0, 210);
 	MainCamera->SetRelativeLocation(MainCameraLocation);
 	MainCamera->AttachParent = GetCapsuleComponent();
 	MainCamera->bUsePawnControlRotation = true;
 
-
 	TopCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("TopCamera"));
-	FVector TopCameraLocation(0, 0, 90);
+	FVector TopCameraLocation(0, 0, 210);
 	TopCamera->SetRelativeLocation(TopCameraLocation);
 	TopCamera->AttachParent = GetCapsuleComponent();
 	TopCamera->bUsePawnControlRotation = true;
 
 	LeftCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("LeftCamera"));
-	FVector LeftCameraLocation(0, -110, 0);
+	FVector LeftCameraLocation(0, -110, 120);
 	LeftCamera->SetRelativeLocation(LeftCameraLocation);
 	LeftCamera->AttachParent = GetCapsuleComponent();
 	LeftCamera->bUsePawnControlRotation = true;
 
 	RightCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("RightCamera"));
-	FVector RightCameraLocation(0, 110, 0);
+	FVector RightCameraLocation(0, 110, 120);
 	RightCamera->SetRelativeLocation(RightCameraLocation);
 	RightCamera->AttachParent = GetCapsuleComponent();
 	RightCamera->bUsePawnControlRotation = true;
@@ -52,7 +51,6 @@ void AKCharacter::BeginPlay()
 	MainCamera->SetActive(true);
 	CurrentCameraIndex = 0;
 	IsSwitching = false;
-
 }
 
 void AKCharacter::Tick( float DeltaTime )

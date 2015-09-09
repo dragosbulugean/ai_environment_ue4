@@ -8,8 +8,8 @@
 
 #define KSize 1024
 
-UKViewportClient::UKViewportClient(const class FPostConstructInitializeProperties& PCIP)
-	: Super(PCIP)
+UKViewportClient::UKViewportClient(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 	toggleBroadcasting = true;
 }
@@ -65,7 +65,7 @@ void UKViewportClient::Draw(FViewport * Viewport, FCanvas * SceneCanvas)
 	//namedWindow("Broadcasting", CV_WINDOW_AUTOSIZE); //create a window with the name "Broadcasting"
 	//imshow("Broadcasting", img); //display the image which is stored in the 'img' in the "Broadcasting" window
 
-	UE_LOG(LogTemp, Warning, TEXT("Broadcasting"));
+	//UE_LOG(LogTemp, Warning, TEXT("Broadcasting"));
 	//}
 }
 

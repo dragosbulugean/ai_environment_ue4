@@ -3,9 +3,6 @@
 #include "Engine/GameViewportClient.h"
 #include "KViewportClient.generated.h"
 
-/**
-*
-*/
 UCLASS()
 class KORTEX_ENVIRONMENT_API UKViewportClient : public UGameViewportClient
 {
@@ -13,18 +10,12 @@ class KORTEX_ENVIRONMENT_API UKViewportClient : public UGameViewportClient
 
 public:
 
-	UKViewportClient(const class FPostConstructInitializeProperties& PCIP);
-	////Controller
-	//AVictoryGamePlayerController * VictoryPC;
-	//Toggle Broadcasting
+	UKViewportClient(const FObjectInitializer& ObjectInitializer);
+
 	bool toggleBroadcasting;
 
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	virtual void Draw(FViewport* Viewport, FCanvas* SceneCanvas) override;
 
-	//Get frames from viewport 
 	void useFrames();
-
-	
 
 };

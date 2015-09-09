@@ -13,47 +13,42 @@ AKGameMode::AKGameMode(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
 	DefaultPawnClass = AKCharacter::StaticClass();
-	/*static ConstructorHelpers::FObjectFinder<UBlueprint> Blueprint(TEXT("Blueprint'/Game/Blueprints/KCharacterBlueprint.KCharacterBlueprint'"));
-	if (Blueprint.Object){
-		DefaultPawnClass = (UClass*)Blueprint.Object->GeneratedClass;
-	}*/
-
-
+	//static ConstructorHelpers::FObjectFinder<UBlueprint> Blueprint(TEXT("Blueprint'/Game/Blueprints/PlayerCharacter.PlayerCharacter'"));
+	//if (Blueprint.Object){
+	//	DefaultPawnClass = (UClass*)Blueprint.Object->GeneratedClass;
+	//}
 }
 
 void AKGameMode::StartPlay()
 {
 
+	Super::StartPlay();
+	StartMatch();
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Kortex Environment"));
+	}
+
 	if (GEngine)
 	{
 		UGameUserSettings* KSettings = GEngine->GetGameUserSettings();
-		KSettings->SetScreenResolution(FIntPoint(2400, 800));
 		KSettings->SetFullscreenMode(EWindowMode::Windowed);
 		KSettings->SetVSyncEnabled(true);
 		KSettings->ApplySettings(true);
 	}
 
-    Super::StartPlay();
-    StartMatch();
-    if (GEngine)
-    {
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Kortex Environment"));
-    }
-
 	UWorld* currentWorld = GetWorld();
-
 	UGameInstance* gameInstance = currentWorld->GetGameInstance();
 	UGameViewportClient* gameViewport = currentWorld->GetGameViewport();
 
 	KLiveStreaming* kss = new KLiveStreaming();
-	kss->Character = Cast<AKCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	AKCharacter* Character = Cast<AKCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	kss->Character = Character;
 	kss->StartupModule();
 	bool isLiveStreamingModuleLoaded = kss->IsModuleLoaded();
 	if (isLiveStreamingModuleLoaded)
 	{
 		UE_LOG(LogTemp, Log, TEXT("Kortex streaming module loaded!"));
 	}
-
-
 
 }

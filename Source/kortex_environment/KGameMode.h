@@ -11,4 +11,5 @@ class KORTEX_ENVIRONMENT_API AKGameMode : public AGameMode
     AKGameMode(const FObjectInitializer& ObjectInitializer);
 	
 	virtual void StartPlay() override;
+
 };
