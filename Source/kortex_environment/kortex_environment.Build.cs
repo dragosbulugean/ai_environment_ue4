@@ -8,7 +8,7 @@ public class kortex_environment : ModuleRules
 {
     public kortex_environment(TargetInfo Target)
     {
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Sockets","Networking"});
         
         PrivateDependencyModuleNames.AddRange (new string[] { });
         

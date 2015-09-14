@@ -41,6 +41,8 @@ public:
 	virtual void QueryLiveStreams( const FString& GameName, FQueryLiveStreamsCallback CompletionCallback ) override;
 
 	AKCharacter* Character;
+	TArray<FColor*> RenderBuffer;
+	FSocket* Socket;
 
 private:
 

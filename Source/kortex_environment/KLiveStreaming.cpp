@@ -3,6 +3,10 @@
 #include "ModuleManager.h"
 #include "Runtime/Core/Public/Features/IModularFeatures.h"
 #include "Runtime/Core/Public/Stats/Stats2.h"
+#include "Networking.h"
+#include "Sockets.h"
+#include "SocketSubsystem.h"
+
 //#include "ISettingsModule.h"
 
 void KLiveStreaming::StartupModule()
@@ -25,7 +29,8 @@ void KLiveStreaming::ShutdownModule()
 	
 }
 
-bool KLiveStreaming::IsModuleLoaded() {
+bool KLiveStreaming::IsModuleLoaded() 
+{
 	FName LiveStreamingFeatureName("LiveStreaming");
 	bool isModuleLoaded = IModularFeatures::Get().IsModularFeatureAvailable(LiveStreamingFeatureName);
 	return isModuleLoaded;
@@ -54,7 +59,28 @@ void KLiveStreaming::StartBroadcasting(const FBroadcastConfig& Config)
 		this->VideoBuffers[VideoBufferIndex] = new uint8[this->BroadcastConfig.VideoBufferWidth * this->BroadcastConfig.VideoBufferHeight * 4];
 		this->AvailableVideoBuffers.Add(this->VideoBuffers[VideoBufferIndex]);
 	}
-	
+
+	Socket = FUdpSocketBuilder(TEXT("XXX"))
+		.AsNonBlocking()
+		.AsReusable()
+		.BoundToAddress(FIPv4Address(127, 0, 0, 1))
+		.BoundToPort(8001)
+		.WithMulticastLoopback();
+
+	Socket->Listen(1);
+
+	//FSocket* Socket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket("KAI", TEXT("default"), false);
+
+	//int32 port = 19834;
+	//FIPv4Address ip;
+	//ip = FIPv4Address(127, 0, 0, 1);
+
+	//auto Address = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
+	//Address->SetIp(ip.GetValue());
+	//Address->SetPort(port);
+
+	//Socket->Bind(*Address);
+
 }
 
 void KLiveStreaming::StopBroadcasting()
@@ -119,8 +145,26 @@ void KLiveStreaming::QueryBroadcastConfig(FBroadcastConfig& OutBroadcastConfig) 
 	
 void KLiveStreaming::PushVideoFrame(const FColor* VideoFrameBuffer)
 {
+	//FPlatformProcess::Sleep(0.1);
 
-	UE_LOG(LogTemp, Warning, TEXT("GOT FRAME!"));
+	/*if (RenderBuffer.Num < 3) {
+		RenderBuffer.Add(VideoFrameBuffer);
+	}*/
+
+	FString serialized = TEXT("teststring|999");
+	TCHAR *serializedChar = serialized.GetCharArray().GetData();
+	int32 size = FCString::Strlen(serializedChar);
+	int32 sent = 0;
+
+	bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
+	if (successful) 
+	{
+		UE_LOG(LogTemp, Display, TEXT("Sent video frame"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Display, TEXT("Didn't send video frame"));
+	}
 
 	/*const uint8_t* Buffer;
 	this->AvailableVideoBuffers.Add(const_cast<uint8*>(Buffer));
