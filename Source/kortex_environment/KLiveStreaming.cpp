@@ -6,6 +6,9 @@
 #include "Networking.h"
 #include "Sockets.h"
 #include "SocketSubsystem.h"
+#include "AllowWindowsPlatformTypes.h"
+#include "zmq.hpp"
+#include "HideWindowsPlatformTypes.h"
 
 //#include "ISettingsModule.h"
 
@@ -60,14 +63,19 @@ void KLiveStreaming::StartBroadcasting(const FBroadcastConfig& Config)
 		this->AvailableVideoBuffers.Add(this->VideoBuffers[VideoBufferIndex]);
 	}
 
-	Socket = FUdpSocketBuilder(TEXT("XXX"))
+	zmq::context_t context(1);
+	zmq::socket_t skt(context, ZMQ_REQ);
+	UE_LOG(LogTemp, Display, TEXT("Connecting to hello world server…"));
+	skt.connect("tcp://localhost:8001");
+
+	/*Socket = FUdpSocketBuilder(TEXT("XXX"))
 		.AsNonBlocking()
 		.AsReusable()
 		.BoundToAddress(FIPv4Address(127, 0, 0, 1))
 		.BoundToPort(8001)
 		.WithMulticastLoopback();
 
-	Socket->Listen(1);
+	Socket->Listen(1);*/
 
 	//FSocket* Socket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket("KAI", TEXT("default"), false);
 

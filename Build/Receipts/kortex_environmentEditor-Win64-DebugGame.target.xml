@@ -11,6 +11,8 @@
     <BuildProduct Path="$(ProjectDir)\Binaries\Win64\UE4Editor-kortex_environment-Win64-DebugGame.pdb" Type="SymbolFile" />
     <BuildProduct Path="$(ProjectDir)\Intermediate\Build\Win64\UE4Editor\DebugGame\UE4Editor-kortex_environment-Win64-DebugGame.lib" Type="ImportLibrary" />
   </BuildProducts>
-  <RuntimeDependencies />
+  <RuntimeDependencies>
+    <RuntimeDependency Path="$(ProjectDir)\Source\ThirdParty\bin\libzmq-v120-mt-4_0_4.dll" />
+  </RuntimeDependencies>
   <bRequireDependenciesToExist>true</bRequireDependenciesToExist>
 </BuildReceipt>
