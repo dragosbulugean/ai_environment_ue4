@@ -4,7 +4,9 @@
 #include "Runtime/Engine/Public/Features/ILiveStreamingService.h"
 #include "Runtime/Engine/Public/Tickable.h"
 #include "KCharacter.h"
-
+#include "AllowWindowsPlatformTypes.h"
+#include "zmq.h"
+#include "HideWindowsPlatformTypes.h"
 
 
 /**
@@ -42,8 +44,10 @@ public:
 
 	AKCharacter* Character;
 	TArray<FColor*> RenderBuffer;
-	FSocket* Socket;
 
+	void *ZMQContext;
+	void *ZMQSocket;
+	
 private:
 
 	/** FTickableGameObject implementation */

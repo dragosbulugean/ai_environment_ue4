@@ -1,4 +1,4 @@
-#include "kortex_environment.h"
+﻿#include "kortex_environment.h"
 #include "KLiveStreaming.h"
 #include "ModuleManager.h"
 #include "Runtime/Core/Public/Features/IModularFeatures.h"
@@ -20,7 +20,7 @@ void KLiveStreaming::StartupModule()
 
 void KLiveStreaming::ShutdownModule()
 {
-	IModularFeatures::Get().UnregisterModularFeature( TEXT( "KLiveStreaming" ), this );
+	IModularFeatures::Get().UnregisterModularFeature( TEXT( "LiveStreaming" ), this );
 
 	// Clean up video buffers
 	for (uint32 VideoBufferIndex = 0; VideoBufferIndex < BufferCount; ++VideoBufferIndex)
@@ -52,7 +52,7 @@ void KLiveStreaming::StartBroadcasting(const FBroadcastConfig& Config)
 
 	this->Tick( 0.0f );
 
-	UE_LOG(LogTemp, Display, TEXT("Kortex broadcast configured for %i x %i resolution"), BroadcastConfig.VideoBufferWidth, BroadcastConfig.VideoBufferHeight);
+	UE_LOG(LogTemp, Display, TEXT("Kortex started broadcast. (%i x %i)"), BroadcastConfig.VideoBufferWidth, BroadcastConfig.VideoBufferHeight);
 
 	// Get our video buffers ready
 	this->AvailableVideoBuffers.Reset();
@@ -63,36 +63,28 @@ void KLiveStreaming::StartBroadcasting(const FBroadcastConfig& Config)
 		this->AvailableVideoBuffers.Add(this->VideoBuffers[VideoBufferIndex]);
 	}
 
-	zmq::context_t context(1);
-	zmq::socket_t skt(context, ZMQ_REQ);
-	UE_LOG(LogTemp, Display, TEXT("Connecting to hello world server�"));
-	skt.connect("tcp://localhost:8001");
+	ZMQContext = zmq_init(1);
+	if (ZMQContext == 0) {
+		printf("Error zmq_init: '%s'\n", zmq_strerror(errno));
+	}
 
-	/*Socket = FUdpSocketBuilder(TEXT("XXX"))
-		.AsNonBlocking()
-		.AsReusable()
-		.BoundToAddress(FIPv4Address(127, 0, 0, 1))
-		.BoundToPort(8001)
-		.WithMulticastLoopback();
+	ZMQSocket = zmq_socket(ZMQContext, ZMQ_PAIR);
+	if (ZMQSocket == 0) {
+		printf("Error zmq_socket: '%s'\n", zmq_strerror(errno));
+	}
 
-	Socket->Listen(1);*/
-
-	//FSocket* Socket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket("KAI", TEXT("default"), false);
-
-	//int32 port = 19834;
-	//FIPv4Address ip;
-	//ip = FIPv4Address(127, 0, 0, 1);
-
-	//auto Address = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
-	//Address->SetIp(ip.GetValue());
-	//Address->SetPort(port);
-
-	//Socket->Bind(*Address);
-
+	auto result = zmq_bind(ZMQSocket, "tcp://127.0.0.1:4440");
+	if (result == 0) {
+		printf("Error zmq_connect: '%s'\n", zmq_strerror(errno));
+	}
 }
 
 void KLiveStreaming::StopBroadcasting()
 {
+
+	//delete ZMQContext;
+	zmq_close(ZMQSocket);
+
 	if( IsBroadcasting() )
 	{
 		bWantsToBroadcastNow = false;
@@ -107,6 +99,8 @@ void KLiveStreaming::StopBroadcasting()
 			this->VideoBuffers[VideoBufferIndex] = nullptr;
 		}
 	}
+	UE_LOG(LogTemp, Display, TEXT("Kortex stopped broadcast. (%i x %i)"), BroadcastConfig.VideoBufferWidth, BroadcastConfig.VideoBufferHeight);
+
 }
 
 bool KLiveStreaming::IsBroadcasting() const
@@ -153,18 +147,43 @@ void KLiveStreaming::QueryBroadcastConfig(FBroadcastConfig& OutBroadcastConfig) 
 	
 void KLiveStreaming::PushVideoFrame(const FColor* VideoFrameBuffer)
 {
-	//FPlatformProcess::Sleep(0.1);
 
-	/*if (RenderBuffer.Num < 3) {
-		RenderBuffer.Add(VideoFrameBuffer);
-	}*/
 
-	FString serialized = TEXT("teststring|999");
-	TCHAR *serializedChar = serialized.GetCharArray().GetData();
-	int32 size = FCString::Strlen(serializedChar);
-	int32 sent = 0;
+	int width = BroadcastConfig.VideoBufferWidth,
+		height = BroadcastConfig.VideoBufferHeight;
+	std::vector<int> videoFrame;
 
-	bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
+	auto DataLength = width * height;
+
+	uint8* frameBuffer = new uint8[DataLength * 3];
+	int index = 0;
+	int32 snt;
+
+	for (auto i = 0; i < DataLength; i++)
+	{
+		frameBuffer[i * 3] = VideoFrameBuffer->R;
+		//UE_LOG(LogTemp, Display, TEXT("R : %d"), vidio[i*3]);
+		​
+			frameBuffer[i * 3 + 1] = VideoFrameBuffer->G;
+		//UE_LOG(LogTemp, Display, TEXT("G : %d"), vidio[i * 3 + 1]);
+		​
+			frameBuffer[i * 3 + 2] = VideoFrameBuffer->B;
+		//UE_LOG(LogTemp, Display, TEXT("B : %d"), vidio[i * 3 + 2]);
+		VideoFrameBuffer++;
+	}
+	
+
+	zmq_msg_t msg;
+	int rc = zmq_msg_init_size(&msg, 6);
+	memset(zmq_msg_data(&msg), 'A', 6);
+	rc = zmq_send(ZMQSocket, &msg, 6, 0);
+	if (rc == -1) {
+		printf("Error zmq_connect: '%s'\n", zmq_strerror(errno));
+	}
+
+	delete[] frameBuffer;
+
+	/*bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
 	if (successful) 
 	{
 		UE_LOG(LogTemp, Display, TEXT("Sent video frame"));
@@ -172,7 +191,7 @@ void KLiveStreaming::PushVideoFrame(const FColor* VideoFrameBuffer)
 	else
 	{
 		UE_LOG(LogTemp, Display, TEXT("Didn't send video frame"));
-	}
+	}*/
 
 	/*const uint8_t* Buffer;
 	this->AvailableVideoBuffers.Add(const_cast<uint8*>(Buffer));
