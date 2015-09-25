@@ -31,10 +31,14 @@ void AKGameMode::StartPlay()
 
 	if (GEngine)
 	{
+		FIntPoint resolution(2016, 1008);
 		UGameUserSettings* KSettings = GEngine->GetGameUserSettings();
-		KSettings->SetFullscreenMode(EWindowMode::Windowed);
+		//KSettings->SetFullscreenMode(EWindowMode::Windowed);
+		KSettings->SetScreenResolution(resolution);
 		KSettings->SetVSyncEnabled(true);
 		KSettings->ApplySettings(true);
+
+
 	}
 
 	UWorld* currentWorld = GetWorld();

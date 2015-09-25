@@ -57,7 +57,7 @@ private:
 	virtual bool IsTickableWhenPaused() const override;
 	virtual bool IsTickableInEditor() const override;
 	FOnChatMessage OnChatMessageEvent;
-
+	
 
 private:
 
@@ -70,4 +70,4 @@ private:
 
 };
 
-
+void my_free(void *data, void *hint);

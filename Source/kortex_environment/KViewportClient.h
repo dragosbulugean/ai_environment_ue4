@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Engine/GameViewportClient.h"
+#include "AllowWindowsPlatformTypes.h"
+#include "zmq.h"
+#include "HideWindowsPlatformTypes.h"
 #include "KViewportClient.generated.h"
 
 UCLASS()
@@ -18,4 +21,9 @@ public:
 
 	void useFrames();
 
+	void *ZMQContext;
+	void *ZMQSocket;
 };
+
+void my_free_viewport(void *data, void *hint);
+

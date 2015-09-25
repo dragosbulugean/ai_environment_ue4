@@ -49,7 +49,7 @@ void KLiveStreaming::StartBroadcasting(const FBroadcastConfig& Config)
 
 	bWantsToBroadcastNow = true;
 	BroadcastConfig = Config;
-
+	
 	this->Tick( 0.0f );
 
 	UE_LOG(LogTemp, Display, TEXT("Kortex started broadcast. (%i x %i)"), BroadcastConfig.VideoBufferWidth, BroadcastConfig.VideoBufferHeight);
@@ -68,12 +68,12 @@ void KLiveStreaming::StartBroadcasting(const FBroadcastConfig& Config)
 		printf("Error zmq_init: '%s'\n", zmq_strerror(errno));
 	}
 
-	ZMQSocket = zmq_socket(ZMQContext, ZMQ_PAIR);
+	ZMQSocket = zmq_socket(ZMQContext, ZMQ_PUSH);
 	if (ZMQSocket == 0) {
 		printf("Error zmq_socket: '%s'\n", zmq_strerror(errno));
 	}
-
-	auto result = zmq_bind(ZMQSocket, "tcp://127.0.0.1:4440");
+	
+	auto result = zmq_connect(ZMQSocket, "tcp://127.0.0.1:4440");
 	if (result == 0) {
 		printf("Error zmq_connect: '%s'\n", zmq_strerror(errno));
 	}
@@ -150,38 +150,40 @@ void KLiveStreaming::PushVideoFrame(const FColor* VideoFrameBuffer)
 
 
 	int width = BroadcastConfig.VideoBufferWidth,
-		height = BroadcastConfig.VideoBufferHeight;
-	std::vector<int> videoFrame;
+		height = BroadcastConfig.VideoBufferHeight,
+		//DataLength = 10000, 
+		DataLength = width * height,
+		bufferSize = DataLength * 3;;
 
-	auto DataLength = width * height;
+	int rc = zmq_send(ZMQSocket, VideoFrameBuffer, DataLength * sizeof(FColor), 0);
 
-	uint8* frameBuffer = new uint8[DataLength * 3];
+	if (rc == -1) {
+		printf("Error zmq_connect: '%s'\n", zmq_strerror(errno));
+	}
+	
+	/*uint8* frameBuffer = new uint8[bufferSize];
 	int index = 0;
-	int32 snt;
 
 	for (auto i = 0; i < DataLength; i++)
 	{
 		frameBuffer[i * 3] = VideoFrameBuffer->R;
-		//UE_LOG(LogTemp, Display, TEXT("R : %d"), vidio[i*3]);
-		​
-			frameBuffer[i * 3 + 1] = VideoFrameBuffer->G;
-		//UE_LOG(LogTemp, Display, TEXT("G : %d"), vidio[i * 3 + 1]);
-		​
-			frameBuffer[i * 3 + 2] = VideoFrameBuffer->B;
-		//UE_LOG(LogTemp, Display, TEXT("B : %d"), vidio[i * 3 + 2]);
+		frameBuffer[i * 3 + 1] = VideoFrameBuffer->G;
+		frameBuffer[i * 3 + 2] = VideoFrameBuffer->B;
 		VideoFrameBuffer++;
 	}
 	
 
 	zmq_msg_t msg;
-	int rc = zmq_msg_init_size(&msg, 6);
-	memset(zmq_msg_data(&msg), 'A', 6);
-	rc = zmq_send(ZMQSocket, &msg, 6, 0);
-	if (rc == -1) {
-		printf("Error zmq_connect: '%s'\n", zmq_strerror(errno));
-	}
+	void *hint = NULL;
+	
+	int rc = zmq_msg_init_data(&msg, frameBuffer, bufferSize, &my_free, hint);
+	memcpy(zmq_msg_data(&msg), frameBuffer, DataLength * 3);
+	memset(zmq_msg_data(&msg), frameBuffer, DataLength * 3);
+	
+	
+	rc = zmq_sendmsg(ZMQSocket, &msg, 0);
 
-	delete[] frameBuffer;
+	delete[] frameBuffer;*/
 
 	/*bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
 	if (successful) 
@@ -279,3 +281,4 @@ TStatId KLiveStreaming::GetStatId() const
 	RETURN_QUICK_DECLARE_CYCLE_STAT(KLiveStreaming, STATGROUP_Tickables);
 }
 
+void my_free(void *data, void *hint) { free(data); }

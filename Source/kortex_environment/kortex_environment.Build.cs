@@ -34,7 +34,6 @@ public class kortex_environment : ModuleRules
             //PublicAdditionalLibraries.Add(openCv2);
 
              //ZeroMQ
-            //RuntimeDependencies.Add(new RuntimeDependency(ThirdPartyModulePath + @"\ThirdParty\bin\libzmq-v120-mt-4_0_4.dll"));
             string zmq = ThirdPartyModulePath + @"\ThirdParty\lib\libzmq-v120-mt-4_0_4.lib";
             PublicAdditionalLibraries.Add(zmq);
             
