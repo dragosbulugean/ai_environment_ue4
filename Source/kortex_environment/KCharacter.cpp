@@ -46,48 +46,41 @@ AKCharacter::AKCharacter(const FObjectInitializer& ObjectInitializer)
 
 void AKCharacter::BeginPlay()
 {
-
     Super::BeginPlay();
 	MainCamera->SetActive(true);
-	CurrentCameraIndex = 0;
 	IsSwitching = false;
 }
 
 void AKCharacter::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-	
 	if (IsSwitching == true)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Current camera is: %d"), CurrentCameraIndex);
 		switch (CurrentCameraIndex)
 		{
 		case 0:
-			TopCamera->SetActive(true);
-			LeftCamera->SetActive(false);
-			RightCamera->SetActive(false);
-			CurrentCameraIndex = 1;
-			break;
-		case 1:
 			TopCamera->SetActive(false);
 			LeftCamera->SetActive(true);
 			RightCamera->SetActive(false);
-			CurrentCameraIndex = 2;
 			break;
-		case 2:
+		case 1:
 			TopCamera->SetActive(false);
 			LeftCamera->SetActive(false);
 			RightCamera->SetActive(true);
-			CurrentCameraIndex = 0;
+			break;
+		case 2:
+			TopCamera->SetActive(true);
+			LeftCamera->SetActive(false);
+			RightCamera->SetActive(false);
 			break;
 		}
+
 	}
 }
 
 void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
-
 	this->Input = InputComponent;
     InputComponent->BindAxis("MoveForward", this, &AKCharacter::MoveForward);
     InputComponent->BindAxis("MoveRight", this, &AKCharacter::MoveRight);
@@ -99,7 +92,6 @@ void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponen
 
 void AKCharacter::MoveForward(float Value)
 {
-
     if ( (Controller != NULL) && (Value != 0.0f) )
     {
         // find out which way is forward
@@ -129,7 +121,6 @@ void AKCharacter::MoveRight(float Value)
 
 void AKCharacter::ToggleStreaming()
 {
-
 #if WITH_EDITOR
 	if (!IEditorLiveStreaming::Get().IsBroadcastingEditor()) {
 		IEditorLiveStreaming::Get().StartBroadcastingEditor();
@@ -152,6 +143,11 @@ void AKCharacter::ToggleStreaming()
 
 
 void AKCharacter::ToggleIsSwitching() {
-	MainCamera->SetActive(false);
 	IsSwitching = IsSwitching == true ? false : true;
+	IsSwitching == true ? MainCamera->SetActive(false) : MainCamera->SetActive(true);
+	TopCamera->SetActive(true);
+	LeftCamera->SetActive(false);
+	RightCamera->SetActive(false);
+	CurrentCameraIndex = 0;
+	this->ToggleStreaming();
 }

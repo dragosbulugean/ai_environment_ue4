@@ -14,22 +14,12 @@
 
 void KLiveStreaming::StartupModule()
 {
-	FMemory::Memzero( VideoBuffers );
 	IModularFeatures::Get().RegisterModularFeature( TEXT( "LiveStreaming" ), this );
 }
 
 void KLiveStreaming::ShutdownModule()
 {
 	IModularFeatures::Get().UnregisterModularFeature( TEXT( "LiveStreaming" ), this );
-
-	// Clean up video buffers
-	for (uint32 VideoBufferIndex = 0; VideoBufferIndex < BufferCount; ++VideoBufferIndex)
-	{
-		delete[] VideoBuffers[ VideoBufferIndex ];
-		VideoBuffers[ VideoBufferIndex ] = nullptr;
-	}
-	AvailableVideoBuffers.Reset();
-	
 }
 
 bool KLiveStreaming::IsModuleLoaded() 
@@ -49,19 +39,11 @@ void KLiveStreaming::StartBroadcasting(const FBroadcastConfig& Config)
 
 	bWantsToBroadcastNow = true;
 	BroadcastConfig = Config;
-	
+	LastSendTime = FPlatformTime::Seconds();
+
 	this->Tick( 0.0f );
 
 	UE_LOG(LogTemp, Display, TEXT("Kortex started broadcast. (%i x %i)"), BroadcastConfig.VideoBufferWidth, BroadcastConfig.VideoBufferHeight);
-
-	// Get our video buffers ready
-	this->AvailableVideoBuffers.Reset();
-	for (uint32 VideoBufferIndex = 0; VideoBufferIndex < this->BufferCount; ++VideoBufferIndex)
-	{
-		// Allocate buffer (width * height * bytes per pixel)
-		this->VideoBuffers[VideoBufferIndex] = new uint8[this->BroadcastConfig.VideoBufferWidth * this->BroadcastConfig.VideoBufferHeight * 4];
-		this->AvailableVideoBuffers.Add(this->VideoBuffers[VideoBufferIndex]);
-	}
 
 	ZMQContext = zmq_init(1);
 	if (ZMQContext == 0) {
@@ -73,7 +55,7 @@ void KLiveStreaming::StartBroadcasting(const FBroadcastConfig& Config)
 		printf("Error zmq_socket: '%s'\n", zmq_strerror(errno));
 	}
 	
-	auto result = zmq_connect(ZMQSocket, "tcp://127.0.0.1:4440");
+	auto result = zmq_bind(ZMQSocket, "tcp://127.0.0.1:4440");
 	if (result == 0) {
 		printf("Error zmq_connect: '%s'\n", zmq_strerror(errno));
 	}
@@ -81,26 +63,13 @@ void KLiveStreaming::StartBroadcasting(const FBroadcastConfig& Config)
 
 void KLiveStreaming::StopBroadcasting()
 {
-
-	//delete ZMQContext;
 	zmq_close(ZMQSocket);
-
-	if( IsBroadcasting() )
+	if (IsBroadcasting())
 	{
 		bWantsToBroadcastNow = false;
-
-		this->Tick( 0.0f );
-
-		// Clean up video buffers
-		this->AvailableVideoBuffers.Reset();
-		for (uint32 VideoBufferIndex = 0; VideoBufferIndex < this->BufferCount; ++VideoBufferIndex)
-		{
-			delete[] this->VideoBuffers[VideoBufferIndex];
-			this->VideoBuffers[VideoBufferIndex] = nullptr;
-		}
+		this->Tick(0.0f);
 	}
 	UE_LOG(LogTemp, Display, TEXT("Kortex stopped broadcast. (%i x %i)"), BroadcastConfig.VideoBufferWidth, BroadcastConfig.VideoBufferHeight);
-
 }
 
 bool KLiveStreaming::IsBroadcasting() const
@@ -148,68 +117,48 @@ void KLiveStreaming::QueryBroadcastConfig(FBroadcastConfig& OutBroadcastConfig) 
 void KLiveStreaming::PushVideoFrame(const FColor* VideoFrameBuffer)
 {
 
+	int Width = BroadcastConfig.VideoBufferWidth,
+		Height = BroadcastConfig.VideoBufferHeight,
+		DataLength = Width * Height,
+		BufferSize = DataLength * 4;
+	
+	double Now = FPlatformTime::Seconds();
+	double ElapsedSinceLastSend = Now - LastSendTime;
 
-	int width = BroadcastConfig.VideoBufferWidth,
-		height = BroadcastConfig.VideoBufferHeight,
-		//DataLength = 10000, 
-		DataLength = width * height,
-		bufferSize = DataLength * 3;;
-
-	int rc = zmq_send(ZMQSocket, VideoFrameBuffer, DataLength * sizeof(FColor), 0);
-
-	if (rc == -1) {
-		printf("Error zmq_connect: '%s'\n", zmq_strerror(errno));
+	if (ElapsedSinceLastSend < SampleTimeInterval) {
+		return;
 	}
-	
-	/*uint8* frameBuffer = new uint8[bufferSize];
-	int index = 0;
 
-	for (auto i = 0; i < DataLength; i++)
-	{
-		frameBuffer[i * 3] = VideoFrameBuffer->R;
-		frameBuffer[i * 3 + 1] = VideoFrameBuffer->G;
-		frameBuffer[i * 3 + 2] = VideoFrameBuffer->B;
-		VideoFrameBuffer++;
+	if (Character->CurrentCameraIndex == 0) {
+		ThreeFrameBuffer = (uint8*) malloc(3 * BufferSize);
+		FMemory::Memcpy(ThreeFrameBuffer, VideoFrameBuffer, BufferSize);
+		Character->CurrentCameraIndex = 1;
 	}
-	
-
-	zmq_msg_t msg;
-	void *hint = NULL;
-	
-	int rc = zmq_msg_init_data(&msg, frameBuffer, bufferSize, &my_free, hint);
-	memcpy(zmq_msg_data(&msg), frameBuffer, DataLength * 3);
-	memset(zmq_msg_data(&msg), frameBuffer, DataLength * 3);
-	
-	
-	rc = zmq_sendmsg(ZMQSocket, &msg, 0);
-
-	delete[] frameBuffer;*/
-
-	/*bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
-	if (successful) 
-	{
-		UE_LOG(LogTemp, Display, TEXT("Sent video frame"));
+	else if (Character->CurrentCameraIndex == 1){
+		FMemory::Memcpy(ThreeFrameBuffer + BufferSize + 1, VideoFrameBuffer, BufferSize);
+		Character->CurrentCameraIndex = 2;
 	}
-	else
-	{
-		UE_LOG(LogTemp, Display, TEXT("Didn't send video frame"));
-	}*/
+	else if (Character->CurrentCameraIndex == 2){
+		FMemory::Memcpy(ThreeFrameBuffer + 2 * BufferSize + 1, VideoFrameBuffer, BufferSize);
+		int rc = zmq_send(ZMQSocket, ThreeFrameBuffer, 3 * BufferSize, 0);
 
-	/*const uint8_t* Buffer;
-	this->AvailableVideoBuffers.Add(const_cast<uint8*>(Buffer));
-	uint8* FrameBuffer = AvailableVideoBuffers.Pop();
-	FMemory::Memcpy(FrameBuffer, VideoFrameBuffer, BroadcastConfig.VideoBufferWidth * BroadcastConfig.VideoBufferHeight * 4);*/
+		if (rc == -1) {
+			printf("Error zmq_connect: '%s'\n", zmq_strerror(errno));
+		}
 
+		free(ThreeFrameBuffer);
+
+		LastSendTime = FPlatformTime::Seconds();
+		Character->CurrentCameraIndex = 0;
+	}
 }
 
 void KLiveStreaming::QueryLiveStreams(const FString& GameName, FQueryLiveStreamsCallback CompletionCallback)
 {
-
 }
 
 void KLiveStreaming::Tick(float DeltaTime)
 {
-
 }
 
 bool KLiveStreaming::IsTickable() const
@@ -229,15 +178,11 @@ bool KLiveStreaming::IsTickableInEditor() const
 
 void KLiveStreaming::StartWebCam(const FWebCamConfig& Config)
 {
-	
 }
-
 
 void KLiveStreaming::StopWebCam()
 {
-	
 }
-
 
 bool KLiveStreaming::IsWebCamEnabled() const
 {
@@ -257,12 +202,10 @@ ILiveStreamingService::FOnChatMessage& KLiveStreaming::OnChatMessage()
 
 void KLiveStreaming::ConnectToChat()
 {
-	
 }
 
 void KLiveStreaming::DisconnectFromChat()
 {
-	
 }
 
 bool KLiveStreaming::IsChatEnabled() const
@@ -273,7 +216,6 @@ bool KLiveStreaming::IsChatEnabled() const
 
 void KLiveStreaming::SendChatMessage(const FString& ChatMessage)
 {
-	
 }
 
 TStatId KLiveStreaming::GetStatId() const

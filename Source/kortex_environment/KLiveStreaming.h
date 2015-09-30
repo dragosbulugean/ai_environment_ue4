@@ -64,9 +64,9 @@ private:
 	FOnStatusChanged OnStatusChangedEvent;
 	bool bWantsToBroadcastNow;
 	FBroadcastConfig BroadcastConfig;
-	static const uint32 BufferCount = 3;
-	uint8* VideoBuffers[BufferCount];
-	TArray<uint8*> AvailableVideoBuffers;
+	uint8* ThreeFrameBuffer;
+	double LastSendTime;
+	double SampleTimeInterval = 0.2f;
 
 };
 
