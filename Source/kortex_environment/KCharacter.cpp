@@ -87,7 +87,6 @@ void AKCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponen
     InputComponent->BindAxis("Turn", this, &AKCharacter::AddControllerYawInput);
     InputComponent->BindAxis("LookUp", this, &AKCharacter::AddControllerPitchInput);
 	InputComponent->BindAction("Switch", IE_Pressed, this, &AKCharacter::ToggleIsSwitching);
-	InputComponent->BindAction("Stream", IE_Pressed, this, &AKCharacter::ToggleStreaming);
 }
 
 void AKCharacter::MoveForward(float Value)

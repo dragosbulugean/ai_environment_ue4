@@ -26,6 +26,8 @@ public:
     void MoveRight(float Val);
     
 	void ToggleStreaming();
+
+	UFUNCTION(BlueprintCallable, Category = "Streaming")
 	void ToggleIsSwitching();
 
 

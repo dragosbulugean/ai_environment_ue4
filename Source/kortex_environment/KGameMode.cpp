@@ -37,6 +37,7 @@ void AKGameMode::StartPlay()
 		KSettings->SetScreenResolution(resolution);
 		KSettings->SetVSyncEnabled(true);
 		KSettings->ApplySettings(true);
+	
 	}
 
 	UWorld* currentWorld = GetWorld();
